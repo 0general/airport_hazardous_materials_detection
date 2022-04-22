@@ -17,8 +17,8 @@ from django.contrib import admin
 from django.urls import path
 
 from dash_view.views import index, error_401, error_404, error_500, page_charts, page_layout_sidenav_light,\
-                       page_layout_static, page_login, page_password, page_register, page_tables
-
+                       page_layout_static, page_login, page_password, page_register, page_tables, \
+                       page_dashboard, page_reports, page_fileupload
 urlpatterns = [
     path('', index),
     path('error_401/', error_401),
@@ -31,5 +31,8 @@ urlpatterns = [
     path('page_password/', page_password),
     path('page_register/', page_register),
     path('page_tables/', page_tables),
+    path('page_dashboard/', page_dashboard),
+    path('page_reports/', page_reports),
+    path('page_fileupload/', page_fileupload),
     path('admin/', admin.site.urls),
 ]

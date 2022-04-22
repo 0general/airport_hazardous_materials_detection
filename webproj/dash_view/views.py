@@ -4,6 +4,15 @@ from django.shortcuts import render, HttpResponse
 def index(request):
     return render(request, "index.html")
 
+def page_dashboard(request):
+    return render(request, "dashboard.html")
+
+def page_reports(request):
+    return render(request, "reports.html")
+
+def page_fileupload(request):
+    return render(request, "fileupload.html")
+
 def error_401(request):
     return render(request, "401.html")
 
@@ -33,3 +42,4 @@ def page_register(request):
 
 def page_tables(request):    
     return render(request, "tables.html")
+
