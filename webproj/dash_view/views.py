@@ -1,4 +1,8 @@
 from django.shortcuts import render, HttpResponse
+from django.core import serializers
+
+from . import models
+from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
@@ -6,6 +10,14 @@ def index(request):
 
 def page_dashboard(request):
     return render(request, "dashboard.html")
+
+def api_notify(request):
+    #content = list(models.Noti.objects.all().order_by('-id').values()) # 내림차순
+    #return JsonResponse({'content': content})    
+    content = models.Noti.objects.all().order_by('-id')
+    content_list = serializers.serialize('json', content)
+    return HttpResponse(content_list, content_type="text/json-comment-filtered")    
+    #return render(request, "", {'content': content})
 
 def page_reports(request):
     return render(request, "reports.html")
