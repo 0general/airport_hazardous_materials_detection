@@ -12,46 +12,69 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>        
+        <!-- <script src="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"></script>
+        <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script> -->
         <script type="text/javascript">
             // 1회 호출
             $.ajax({
-                    url: "{% url 'api_notify' %}",
-                    dataType: "json",
-                    success: function (data) {                 
-                        var apiTest = "";
-                        for (var i = 0; i < data.length; i++) {                        
-                            apiTest += "<tr>"
-                            apiTest += "<td>" + data[i].fields.timestamp + "</td>"
-                            apiTest += "<td>" + data[i].fields.message + "</td>"
-                            apiTest += "</tr>"
-                        }
-                        $('[id="Notify"]').html(apiTest);
-                    },
-                    error: function (request, status, error) {
-                        console.log('실패');
+                url: "{% url 'api_notify' %}",
+                dataType: "json",
+                success: function (data) {   
+                    // var dashviewTest = "";                                                 
+                    //     for (var i = 0; i < data.length; i++) {                
+                    //         apiTest += "<li class='mis-slide'>"                                            
+                    //         dashviewTest += "<img src='/static/images/"+ data[i].fields.img_name + "' width='1000' height='700'>"                      
+                    //         // dashviewTest += "<img src='{% static 'images/"+ data[i].fields.img_name + "' %}' width='1000' height='700'>"
+                    //         apiTest += "</li>"
+                    //     }                                
+                    // $('[id="slider_id"]').html(dashviewTest);
+
+                    var apiTest = "";
+                    for (var i = 0; i < data.length; i++) {                        
+                        apiTest += "<tr>"
+                        apiTest += "<td id='" + data[i].pk + "'>" + data[i].fields.timestamp + "</td>"
+                        apiTest += "<td id='" + data[i].pk + "'>" + data[i].fields.message + "</td>"
+                        apiTest += "</tr>"
                     }
-                })
+                    $('[id="Notify"]').html(apiTest);
+                },
+                error: function (request, status, error) {
+                    console.log('실패');
+                }
+            })
             // 10초마다 호출.
+            // 5초후 호출.
             timer = setInterval( function() {
-                $.ajax({
-                    url: "{% url 'api_notify' %}",
-                    dataType: "json",
-                    success: function (data) {                 
-                        var apiTest = "";
-                        for (var i = 0; i < data.length; i++) {                        
-                            apiTest += "<tr>"
-                            apiTest += "<td>" + data[i].fields.timestamp + "</td>"
-                            apiTest += "<td>" + data[i].fields.message + "</td>"
-                            apiTest += "</tr>"
-                        }
-                        $('[id="Notify"]').html(apiTest);
-                    },
-                    error: function (request, status, error) {
-                        console.log('실패');
-                    }
-                })
-            }, 10000);
+                // $.ajax({
+                //     url: "{% url 'api_notify' %}",
+                //     dataType: "json",
+                //     success: function (data) {
+                //         var dashviewTest = "";                                                 
+                //         for (var i = 0; i < data.length; i++) {                
+                //             apiTest += "<li class='mis-slide'>"                                            
+                //             dashviewTest += "<img src='/static/images/"+ data[i].fields.img_name + "' width='1000' height='700'>"                      
+                //             // dashviewTest += "<img src='{% static 'images/"+ data[i].fields.img_name + "' %}' width='1000' height='700'>"
+                //             apiTest += "</li>"
+                //         }                                
+                //         $('[id="slider_id"]').html(dashviewTest);
+
+                //         var apiTest = "";
+                //         for (var i = 0; i < data.length; i++) {                        
+                //             apiTest += "<tr>"
+                //             apiTest += "<td id='" + data[i].pk + "'>" + data[i].fields.timestamp + "</td>"
+                //             apiTest += "<td id='" + data[i].pk + "'>" + data[i].fields.message + "</td>"
+                //             apiTest += "</tr>"
+                //         }
+                //         $('[id="Notify"]').html(apiTest);
+                //     },
+                //     error: function (request, status, error) {
+                //         console.log('실패');
+                //     }
+                // })
+                window.location.reload()
+            }, 40000);
+            
         </script>
         <link href="{% static 'css/mislider.css' %}" rel="stylesheet">
         <script src="{% static 'js/mislider.js' %}"></script>
@@ -218,6 +241,25 @@
                                 </div>
                             </div>
                         </div> -->
+                        <script type="text/javascript">
+                            // 1회 호출
+                            $.ajax({
+                                url: "{% url 'api_notify' %}",
+                                dataType: "json",
+                                success: function (data) {
+                                    var apiTest = "";                                                 
+                                    for (var i = 0; i < data.length; i++) {                
+                                        // apiTest += "<li class='mis-slide'>"                                            
+                                        apiTest += "<img src='/static/images/"+ data[i].fields.img_name + "' width='1000' height='700'>"                                    
+                                        // apiTest += "</li>"
+                                    }                                
+                                    $('[id="img-slider"]').html(apiTest);
+                                },
+                                error: function (request, status, error) {
+                                    console.log('실패');
+                                }
+                            })
+                        </script>
                         <div class="row">
                             <div class="container-fluid px-4">
                                 <div class="card mb-4">
@@ -226,41 +268,26 @@
                                         Detect Image Viewer
                                     </div>
                                     <!-- <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div> -->
-                                    <div class="mis-stage">
-                                        <ol class="mis-slider">
+                                    <div class="mis-stage" id='solo_id'>
+                                        <ol class="mis-slider" id='slider_id'>
                                             <li class="mis-slide">
-                                                <img src="{% static 'images/detect_01.png' %}"  width="1000" height="700" alt="Lillies">
+                                                <img src="{% static 'images/detect_01.png' %}"  width="1000" height="700">
                                             </li>
                                             <li class="mis-slide">
-                                                <img src="{% static 'images/detect_02.png' %}"  width="1000" height="700" alt="Lillies">
+                                                <img src="{% static 'images/detect_02.png' %}"  width="1000" height="700">
                                             </li>
                                             <li class="mis-slide">
-                                                <img src="{% static 'images/detect_03.png' %}"  width="1000" height="700" alt="Lillies">
+                                                <img src="{% static 'images/detect_03.png' %}"  width="1000" height="700">
                                             </li>
                                             <li class="mis-slide">
-                                                <img src="{% static 'images/detect_04.png' %}"  width="1000" height="700" alt="Lillies">
+                                                <img src="{% static 'images/detect_04.png' %}"  width="1000" height="700">
                                             </li>
                                             <li class="mis-slide">
-                                                <img src="{% static 'images/detect_05.png' %}"  width="1000" height="700" alt="Lillies">
-                                            </li>
-                                            <li class="mis-slide">
-                                                <img src="{% static 'images/detect_06.png' %}"  width="1000" height="700" alt="Lillies">
-                                            </li>
-                                            <li class="mis-slide">
-                                                <img src="{% static 'images/detect_07.png' %}"  width="1000" height="700" alt="Lillies">
-                                            </li>
-                                            <li class="mis-slide">
-                                                <img src="{% static 'images/detect_08.png' %}"  width="1000" height="700" alt="Lillies">
-                                            </li>
-                                            <li class="mis-slide">
-                                                <img src="{% static 'images/detect_09.png' %}"  width="1000" height="700" alt="Lillies">
-                                            </li>
-                                            <li class="mis-slide">
-                                                <img src="{% static 'images/detect_10.png' %}"  width="1000" height="700" alt="Lillies">
+                                                <img src="{% static 'images/detect_05.png' %}"  width="1000" height="700">
                                             </li>
                                         </ol>
                                     </div>
-                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                                    <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
                                 </div>
                             </div>
                             
@@ -280,6 +307,9 @@
                                 Notification List
                             </div>
                             <div class="card-body">
+                                <!-- <div id="events">
+                                    Event summary - new events added at the top
+                                </div> -->
                                 <table id="datatablesSimple2">
                                     <thead>
                                         <tr>

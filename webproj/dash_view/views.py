@@ -4,6 +4,8 @@ from django.core import serializers
 from . import models
 from django.http import JsonResponse
 
+from django.db.models import Q
+
 # Create your views here.
 def index(request):
     return render(request, "index.html")
@@ -14,10 +16,17 @@ def page_dashboard(request):
 def api_notify(request):
     #content = list(models.Noti.objects.all().order_by('-id').values()) # 내림차순
     #return JsonResponse({'content': content})    
-    content = models.Noti.objects.all().order_by('-id')
+    content = models.Noti.objects.all().order_by('-id')[:5]
     content_list = serializers.serialize('json', content)
     return HttpResponse(content_list, content_type="text/json-comment-filtered")    
     #return render(request, "", {'content': content})
+
+def api_notifySelect(request):
+    # q = Q()
+    # q.add(Q(id=request.GET['id']))
+    content = models.Noti.objects.filter(id=request.GET['id'])
+    content_list = serializers.serialize('json', content)
+    return HttpResponse(content_list, content_type="text/json-comment-filtered") 
 
 def page_reports(request):
     return render(request, "reports.html")
