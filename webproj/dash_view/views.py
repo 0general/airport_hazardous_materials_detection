@@ -35,9 +35,9 @@ def api_notifySelect(request):
     return HttpResponse(content_list, content_type="text/json-comment-filtered") 
 
 def page_reports(request):
-    # itemlist = models.DetectedItem.objects.all() # 여기서 오류남
-    # return render(request, "reports.html",{'itemlist': itemlist})
-    return render(request, "reports.html")
+    itemlist = models.DetectedItem.objects.all()  # 여기서 오류남
+    return render(request, "reports.html", {'itemlist': itemlist})
+    # return render(request, "reports.html")
 
 
 def page_fileupload(request):
