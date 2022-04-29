@@ -15,7 +15,9 @@ def index(request):
 
 
 def page_dashboard(request):
-    return render(request, "dashboard.html")
+    content = models.Noti.objects.all().order_by('-id')[:5].values('img_name')
+    # content_list = serializers.serialize('json', content)
+    return render(request, "dashboard.html", {'content': content})
 
 
 def api_notify(request):
