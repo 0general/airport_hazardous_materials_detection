@@ -45,10 +45,6 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="/">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
-                            </a>
                             <a class="nav-link" href="/page_dashboard">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 [Project] Dashboard
@@ -129,38 +125,6 @@
                         {% csrf_token %}
                         <input type="submit" value="Upload">
                     </form>
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>Upload Date & Time</th>
-                            <th>Title</th>
-                            <th>Title</th>
-                            <th>File Path</th>
-                        </tr>
-                        {% for file in files %}
-                            <tr>
-                                <td>{{ file.id }}</td>
-                                <td>{{ file.dateTimeOfUpload }}</td>
-                                <td>{{ file.title }}</td>
-                                <td>{{ file.title }}</td>
-                                <td>{{ file.uploadedFile.url }}</td>
-                            </tr>
-                        {% endfor %}
-                    </table>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">Tables</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Tables</li>
-                        </ol>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
-                                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-                                .
-                            </div>
-                        </div>
-                    </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
