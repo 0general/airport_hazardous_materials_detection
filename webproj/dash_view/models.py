@@ -8,11 +8,11 @@ class Noti(models.Model):
     timestamp = models.CharField(max_length=100)
     message = models.TextField()
     img_name = models.TextField()
+    uploadedfile = models.FileField(upload_to = "Uploaded Files/")
 
     class Meta:
         managed = False
         db_table = 'dashview_notify'
-
 
 class DetectedItem(models.Model):
     HAZARDOUS_ITEM = [

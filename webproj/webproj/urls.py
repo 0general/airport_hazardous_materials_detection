@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from dash_view.views import index, error_401, error_404, error_500, page_charts, page_layout_sidenav_light,\
                        page_layout_static, page_login, page_password, page_register, page_tables, \
@@ -36,5 +36,6 @@ urlpatterns = [
     path('api_notifySelect/', api_notifySelect, name='api_notifySelect'),
     path('page_reports/', page_reports),
     path('page_fileupload/', page_fileupload),
+    path("", include("dash_view.urls")),
     path('admin/', admin.site.urls),
 ]

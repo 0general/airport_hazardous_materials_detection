@@ -5,7 +5,6 @@ from pathlib import Path
 import shutil
 from time import sleep, strftime, localtime, time
 
-
 def make_frame(video_root, save_root, debug, delete_root=None):
 
     for video_file in glob(os.path.join(video_root, "*.mp4")):
@@ -59,6 +58,7 @@ if __name__ == "__main__":
     test_root = r"C:/Users/YunA/Desktop/media"
     save_root = r"C:/Users/YunA/Desktop/media/result"
     debug_ok = False
+    move_root = r"C:/Users/YunA/Desktop/media/delete"
 
     # make_frame(test_root, save_root, debug_ok)
-    make_frame(test_root, save_root, debug_ok, r"C:/Users/YunA/Desktop/media/delete")
+    make_frame(test_root, save_root, debug_ok, move_root)

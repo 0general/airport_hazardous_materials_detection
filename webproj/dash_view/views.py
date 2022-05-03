@@ -1,14 +1,17 @@
 from django.shortcuts import render, HttpResponse
 from django.core import serializers
 
-from . import models
+from . import models, preprocessing, Run_inf
 
 from django.http import JsonResponse
 
 from django.db.models import Q
 
 # Create your views here.
-
+test_root = r"C:/Users/YunA/Desktop/web_test/airport_hazardous_materials_detection/webproj/media/Uploaded Files"
+save_root = r"C:/Users/YunA/Desktop/web_test/airport_hazardous_materials_detection/webproj/media/Uploaded Files/result"
+debug_ok = False
+move_root = r"C:/Users/YunA/Desktop/web_test/airport_hazardous_materials_detection/webproj/media/Uploaded Files/delete"
 
 def index(request):
     return render(request, "index.html")
@@ -43,7 +46,26 @@ def page_reports(request):
 
 
 def page_fileupload(request):
-    return render(request, "fileupload.html")
+    if request.method == "POST":
+        # Fetching the form data
+        fileTitle = request.POST["fileTitle"]
+        File = request.FILES["uploadedFile"]
+        # print(models.Noti.objects.order_by('-pk')[0].id)
+        # Saving the information in the database
+        document = models.Noti(
+            id =  models.Noti.objects.order_by('-pk')[0].id + 1, 
+            img_name = fileTitle,
+            uploadedfile = File
+        )
+        document.save()
+        preprocessing.make_frame(test_root, save_root, debug_ok, move_root)
+        documents = models.Noti.objects.all()
+
+        return render(request, "fileupload.html", context = {
+            "files": documents
+        })
+    else:
+        return render(request, "fileupload.html")
 
 
 def error_401(request):
