@@ -9,9 +9,9 @@ from django.db.models import Q
 
 # Create your views here.
 test_root = r"/home/ubuntu/jonghyeon/airport_hazardous_materials_detection/webproj/media/Uploaded_Files"
-save_root = r"/home/ubuntu/jonghyeon/web_test/airport_hazardous_materials_detection/webproj/media/Uploaded_Files/result"
+save_root = r"/home/ubuntu/jonghyeon/airport_hazardous_materials_detection/webproj/media/Uploaded_Files/result"
 debug_ok = False
-move_root = r"/home/ubuntu/jonghyeon/web_test/airport_hazardous_materials_detection/webproj/media/Uploaded_Files/delete"
+move_root = r"/home/ubuntu/jonghyeon/airport_hazardous_materials_detection/webproj/media/Uploaded_Files/delete"
 
 def index(request):
     return render(request, "index.html")
