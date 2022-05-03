@@ -21,8 +21,8 @@ def page_dashboard(request):
 
 
 def api_notify(request):
-    #content = list(models.Noti.objects.all().order_by('-id').values()) # 내림차순
-    #return JsonResponse({'content': content})    
+    # content = list(models.Noti.objects.all().order_by('-id').values()) # 내림차순
+    # return JsonResponse({'content': content})
     content = models.Noti.objects.all().order_by('-id')[:5]
     content_list = serializers.serialize('json', content)
     return HttpResponse(content_list, content_type="text/json-comment-filtered")
@@ -34,10 +34,11 @@ def api_notifySelect(request):
     # q.add(Q(id=request.GET['id']))
     content = models.Noti.objects.filter(id=request.GET['id'])
     content_list = serializers.serialize('json', content)
-    return HttpResponse(content_list, content_type="text/json-comment-filtered") 
+    return HttpResponse(content_list, content_type="text/json-comment-filtered")
+
 
 def page_reports(request):
-    itemlist = models.DetectedItem.objects.all()  # 여기서 오류남
+    itemlist = models.Noti.objects.all()  # 여기서 오류남
     return render(request, "reports.html", {'itemlist': itemlist})
     # return render(request, "reports.html")
 
