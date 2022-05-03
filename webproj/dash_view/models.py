@@ -8,7 +8,7 @@ class Noti(models.Model):
     timestamp = models.CharField(max_length=100)
     message = models.TextField()
     img_name = models.TextField()
-    uploadedfile = models.FileField(upload_to = "Uploaded Files/")
+    uploadedfile = models.FileField(upload_to = "Uploaded_Files/")
 
     class Meta:
         managed = False
