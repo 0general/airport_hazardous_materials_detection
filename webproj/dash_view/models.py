@@ -2,9 +2,8 @@ from django.db import models
 
 # Create your models here.
 
-class uploadfile(models.model):
+class uploadfile(models.Model):
     id = models.IntegerField(auto_created=True, primary_key=True)
-    timestamp = models.CharField(max_length=100)
     uploadedfile = models.FileField(upload_to = "Uploaded_Files/")
 
     class Meta:
