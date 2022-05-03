@@ -50,22 +50,22 @@ def page_fileupload(request):
         # Fetching the form data
         fileTitle = request.POST["fileTitle"]
         File = request.FILES["uploadedFile"]
-        unique_id = models.Noti.objects.order_by('-pk')[0].id + 1
+        try:
+            unique_id = models.uploadfile.objects.order_by('-pk')[0].id + 1
+        except IndexError as e:
+            unique_id = 1
         # print(models.Noti.objects.order_by('-pk')[0].id)
         # Saving the information in the database
-        document = models.Noti(
+        document = models.uploadfile(
             id =   unique_id, 
-            img_name = fileTitle,
             uploadedfile = File
         )
         document.save()
         preprocessing.make_frame(test_root, save_root, debug_ok, move_root)
         Run_inf.inference(save_root, move_root, unique_id)
-        documents = models.Noti.objects.all()
+        # documents = models.Noti.objects.all()
 
-        return render(request, "fileupload.html", context = {
-            "files": documents
-        })
+        return render(request, "fileupload.html")
     else:
         return render(request, "fileupload.html")
 

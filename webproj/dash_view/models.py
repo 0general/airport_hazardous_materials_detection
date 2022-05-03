@@ -2,13 +2,21 @@ from django.db import models
 
 # Create your models here.
 
+class uploadfile(models.model):
+    id = models.IntegerField(auto_created=True, primary_key=True)
+    timestamp = models.CharField(max_length=100)
+    uploadedfile = models.FileField(upload_to = "Uploaded_Files/")
+
+    class Meta:
+        managed = False
+        db_table = 'upload'
 
 class Noti(models.Model):
     id = models.IntegerField(auto_created=True, primary_key=True)
     timestamp = models.CharField(max_length=100)
     message = models.TextField()
     img_name = models.TextField()
-    uploadedfile = models.FileField(upload_to = "Uploaded_Files/")
+    file_dir = models.CharField(max_length=100)
 
     class Meta:
         managed = False
