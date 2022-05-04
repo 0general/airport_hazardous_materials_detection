@@ -36,7 +36,7 @@ def inference(input_root, delete_root, job_num):
         darknet.print_detections(detections)
       
         for label, conf, bbox in detections:
-            if conf >= 40:
+            if conf:
                 result_img = "/home/ubuntu/jonghyeon/airport_hazardous_materials_detection/webproj/dash_view/static/images/{}/inf_{}.jpg".format(job_num, name)
                 cv2.imwrite(result_img, image)
                 noti_data = models.Noti(
