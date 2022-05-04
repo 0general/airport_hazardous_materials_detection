@@ -23,7 +23,8 @@ def inference(input_root, delete_root, job_num):
         # argument = "/home/ubuntu/yolo/darknet/darknet detector test /home/ubuntu/cfgs/custom_wanda.data /home/ubuntu/cfgs/yolov3_custom_wanda.cfg /home/ubuntu/cfgs/yolov3_custom_last_F1_93.weights {} thresh=0.4".format(imgs)
         
         # os.system(argument)
-        os.system(imgs)
+        print(imgs)
+        # os.system(imgs)
 
         # 추론 결과 prediction.jpg 파일명 변경 및 저장
         result_img = "/home/ubuntu/result/{}/inf_{}.jpg".format(job_num, name)
