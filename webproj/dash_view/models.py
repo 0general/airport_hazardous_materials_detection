@@ -2,6 +2,13 @@ from django.db import models
 
 # Create your models here.
 
+class uploadfile(models.Model):
+    id = models.IntegerField(auto_created=True, primary_key=True)
+    uploadedfile = models.FileField(upload_to = "Uploaded_Files/")
+
+    class Meta:
+        managed = True
+        db_table = 'upload'
 
 class Noti(models.Model):
     id = models.IntegerField(auto_created=True, primary_key=True)
