@@ -14,7 +14,7 @@ def inference(input_root, delete_root, job_num):
     # 추론 결과 저장 디렉토리 고유 번호로 생성
     os.system("mkdir /home/ubuntu/result/{}".format(job_num))
 
-    os.system("/home/ubuntu/yolo/darknet/darknet detector test /home/ubuntu/cfgs/custom_wanda.data /home/ubuntu/cfgs/yolov3_custom_wanda.cfg /home/ubuntu/cfgs/yolov3_custom_last_F1_93.weights")
+    os.system("/home/ubuntu/yolo/darknet/darknet detector test /home/ubuntu/cfgs/custom_wanda.data /home/ubuntu/cfgs/yolov3_custom_wanda.cfg /home/ubuntu/cfgs/yolov3_custom_last_F1_93.weights {} thresh=0.4".format(input_root))
     count = 0
     for imgs in glob(os.path.join(input_root, "*.jpg")):
         name = Path(imgs).stem 
@@ -23,8 +23,7 @@ def inference(input_root, delete_root, job_num):
         # argument = "/home/ubuntu/yolo/darknet/darknet detector test /home/ubuntu/cfgs/custom_wanda.data /home/ubuntu/cfgs/yolov3_custom_wanda.cfg /home/ubuntu/cfgs/yolov3_custom_last_F1_93.weights {} thresh=0.4".format(imgs)
         
         # os.system(argument)
-        print(imgs)
-        # os.system(imgs)
+        os.system(imgs)
 
         # 추론 결과 prediction.jpg 파일명 변경 및 저장
         result_img = "/home/ubuntu/result/{}/inf_{}.jpg".format(job_num, name)
