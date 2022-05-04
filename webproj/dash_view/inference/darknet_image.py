@@ -194,10 +194,10 @@ def main():
 
     random.seed(3)  # deterministic bbox colors
     network, class_names, class_colors = darknet.load_network(
-        args.config_file,
-        args.data_file,
-        args.weights,
-        batch_size=args.batch_size
+        "/home/ubuntu/cfgs/yolov3_custom_wanda.cfg",
+        "/home/ubuntu/cfgs/custom_wanda.data",
+        "/home/ubuntu/cfgs/yolov3_custom_last_F1_93.weights",
+        batch_size=1
     )
 
     images = load_images(args.input)

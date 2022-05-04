@@ -4,7 +4,8 @@ from pathlib import Path
 import random
 from sqlite3 import Timestamp
 from tkinter import image_names
-from . import models, darknet, darknet_image
+from . import models
+from .inference import darknet, darknet_image
 from datetime import datetime
 # import pyautogui
 
