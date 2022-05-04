@@ -17,10 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 from dash_view.views import index, error_401, error_404, error_500, page_charts, page_layout_sidenav_light,\
-                       page_layout_static, page_login, page_password, page_register, page_tables, \
-                       page_dashboard, page_reports, page_fileupload, api_notify, api_notifySelect
+    page_layout_static, page_login, page_password, page_register, page_tables, \
+    page_dashboard, page_reports, page_fileupload, api_notify, api_notifySelect
 urlpatterns = [
-    path('', index),
+    path('', page_fileupload),
     path('error_401/', error_401),
     path('error_404/', error_404),
     path('error_500/', error_500),
