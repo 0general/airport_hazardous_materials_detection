@@ -1,8 +1,18 @@
+#!/usr/bin/env python3
+
+"""
+Python 3 wrapper for identifying objects in images
+
+Running the script requires opencv-python to be installed (`pip install opencv-python`)
+Directly viewing or returning bounding-boxed images requires scikit-image to be installed (`pip install scikit-image`)
+Use pip3 instead of pip on some systems to be sure to install modules for python3
+"""
+
 from ctypes import *
 import math
 import random
 import os
-import numpy as np
+
 
 class BOX(Structure):
     _fields_ = [("x", c_float),
@@ -50,6 +60,7 @@ def network_width(net):
 def network_height(net):
     return lib.network_height(net)
 
+
 def bbox2points(bbox):
     """
     From bounding box yolo format
@@ -72,6 +83,7 @@ def class_colors(names):
         random.randint(0, 255),
         random.randint(0, 255),
         random.randint(0, 255)) for name in names}
+
 
 def load_network(config_file, data_file, weights, batch_size=1):
     """
@@ -122,6 +134,8 @@ def decode_detection(detections):
         decoded.append((str(label), confidence, bbox))
     return decoded
 
+# https://www.pyimagesearch.com/2015/02/16/faster-non-maximum-suppression-python/
+# Malisiewicz et al.
 def non_max_suppression_fast(detections, overlap_thresh):
     boxes = []
     for detection in detections:
@@ -170,7 +184,6 @@ def non_max_suppression_fast(detections, overlap_thresh):
         # return only the bounding boxes that were picked using the
         # integer data type
     return [detections[i] for i in pick]
-
 
 def remove_negatives(detections, class_names, num):
     """
@@ -229,7 +242,6 @@ else:
     print("Unsupported OS")
     exit
 
-
 lib.network_width.argtypes = [c_void_p]
 lib.network_width.restype = c_int
 lib.network_height.argtypes = [c_void_p]
@@ -279,7 +291,6 @@ load_net.restype = c_void_p
 load_net_custom = lib.load_network_custom
 load_net_custom.argtypes = [c_char_p, c_char_p, c_int, c_int]
 load_net_custom.restype = c_void_p
-
 
 free_network_ptr = lib.free_network_ptr
 free_network_ptr.argtypes = [c_void_p]
