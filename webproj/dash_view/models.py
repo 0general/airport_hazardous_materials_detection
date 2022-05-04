@@ -7,7 +7,7 @@ class uploadfile(models.Model):
     uploadedfile = models.FileField(upload_to = "Uploaded_Files/")
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'upload'
 
 class Noti(models.Model):
