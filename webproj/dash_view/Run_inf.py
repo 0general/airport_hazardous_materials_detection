@@ -6,7 +6,7 @@ import cv2
 from sqlite3 import Timestamp
 from tkinter import image_names
 from . import models
-from .inference import darknet, darknet_images
+from .inference import darknet, darknet_image
 from datetime import datetime
 
 def inference(input_root, delete_root, job_num):
@@ -30,7 +30,7 @@ def inference(input_root, delete_root, job_num):
     for imgs in glob(os.path.join(input_root, "*.jpg")):
         name = Path(imgs).stem 
 
-        image, detections = darknet_images.image_detection(
+        image, detections = darknet_image.image_detection(
             imgs, network, class_names, class_colors, 0.4
             )
         darknet.print_detections(detections)
