@@ -15,7 +15,7 @@ def inference(input_root, delete_root, job_num):
         os.system("rm {}".format(video))
 
     # 추론 결과 저장 디렉토리 고유 번호로 생성
-    os.system("mkdir /home/ubuntu/result/{}".format(job_num))
+    os.system("mkdir /home/ubuntu/jonghyeon/airport_hazardous_materials_detection/webproj/dash_view/static/images/{}".format(job_num))
     
     count = 0
     random.seed(3)  # deterministic bbox colors
@@ -29,7 +29,7 @@ def inference(input_root, delete_root, job_num):
 
     for imgs in glob(os.path.join(input_root, "*.jpg")):
         name = Path(imgs).stem 
-        
+
         image, detections = darknet_image.image_detection(
             imgs, network, class_names, class_colors, 0.4
             )
@@ -37,12 +37,12 @@ def inference(input_root, delete_root, job_num):
       
         for label, conf, bbox in detections:
             if conf >= 40:
-                result_img = "/home/ubuntu/result/{}/inf_{}.jpg".format(job_num, name)
+                result_img = "/home/ubuntu/jonghyeon/airport_hazardous_materials_detection/webproj/dash_view/static/images/{}/inf_{}.jpg".format(job_num, name)
                 cv2.imwrite(result_img, image)
                 noti_data = models.Noti(
-                    # id = count, # id 중복안되게 count 말고 다른거로 변경해야됨.
+                    id = job_num* 100000 + count, # id 중복안되게 count 말고 다른거로 변경해야됨.
                     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                    img_name = result_img,
+                    img_name = "{}/inf_{}.jpg".format(job_num, name),
                     confidence = conf,
                     item_class = label,
                 )
