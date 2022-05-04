@@ -18,7 +18,7 @@ def index(request):
 
 
 def page_dashboard(request):
-    content = models.Noti.objects.all().order_by('-id')[:5].values('img_name')
+    content = models.Noti.objects.all().order_by('-id')[:12].values('img_name')
     # content_list = serializers.serialize('json', content)
     return render(request, "dashboard.html", {'content': content})
 
@@ -26,7 +26,7 @@ def page_dashboard(request):
 def api_notify(request):
     # content = list(models.Noti.objects.all().order_by('-id').values()) # 내림차순
     # return JsonResponse({'content': content})
-    content = models.Noti.objects.all().order_by('-id')[:5]
+    content = models.Noti.objects.all().order_by('-id')[:12]
     content_list = serializers.serialize('json', content)
     return HttpResponse(content_list, content_type="text/json-comment-filtered")
     # return render(request, "", {'content': content})
