@@ -1,4 +1,5 @@
 import os
+os.environ['DISPLAY'] = ':0'
 from glob import glob
 from pathlib import Path
 from sqlite3 import Timestamp
