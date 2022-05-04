@@ -40,7 +40,7 @@ def api_notifySelect(request):
     return HttpResponse(content_list, content_type="text/json-comment-filtered") 
 
 def page_reports(request):
-    itemlist = models.DetectedItem.objects.all()  # 여기서 오류남
+    itemlist = models.Noti.objects.all()  # 여기서 오류남
     return render(request, "reports.html", {'itemlist': itemlist})
     # return render(request, "reports.html")
 
@@ -48,7 +48,7 @@ def page_reports(request):
 def page_fileupload(request):
     if request.method == "POST":
         # Fetching the form data
-        fileTitle = request.POST["fileTitle"]
+        # fileTitle = request.POST["fileTitle"]
         File = request.FILES["uploadedFile"]
         try:
             unique_id = models.uploadfile.objects.order_by('-pk')[0].id + 1
