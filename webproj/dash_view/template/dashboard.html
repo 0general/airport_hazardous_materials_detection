@@ -34,7 +34,7 @@
                     for (var i = 0; i < data.length; i++) {                        
                         apiTest += "<tr>"
                         apiTest += "<td id='" + data[i].pk + "'>" + data[i].fields.timestamp + "</td>"
-                        apiTest += "<td id='" + data[i].pk + "'>" + data[i].fields.message + "</td>"
+                        apiTest += "<td id='" + data[i].pk + "'>" + "WARNING : "+ data[i].fields.item_class + " detected with confidence " + data[i].fields.confidence + "</td>"
                         apiTest += "</tr>"
                     }
                     $('[id="Notify"]').html(apiTest);
