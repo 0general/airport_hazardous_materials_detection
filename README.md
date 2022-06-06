@@ -66,8 +66,11 @@ pip install Django
 ---
 [**AI hub**](https://aihub.or.kr/aidata/33)
 <p align="center">
-<img width="80%" src="https://user-images.githubusercontent.com/56211221/168599645-fc82521f-e075-4734-8dae-7e39523cb5ad.png">
-Rapiscan</p>
+<img width="80%" src="https://user-images.githubusercontent.com/56211221/168599645-fc82521f-e075-4734-8dae-7e39523cb5ad.png"/>
+</p>  
+<p align="center">
+Rapiscan
+</p>
 
 <br>
 
